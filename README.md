@@ -19,7 +19,7 @@ python3 iron_clap.py
 
 The script will listen for loud sounds (claps). When detected, it:
 - Opens VS Code
-- Plays "Back in Black" in Spotify
+- Plays "Back in Black" in YouTube
 
 ## Tune Sensitivity
 
