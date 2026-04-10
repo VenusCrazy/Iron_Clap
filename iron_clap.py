@@ -79,7 +79,12 @@ def trigger_action():
         subprocess.run(["open", "https://www.youtube.com/watch?v=qRrElw4TSB4&autoplay=1"])
         
         time.sleep(0.5)
-        script = 'tell app "Terminal" to do script "opencode"'
+        script = '''
+        tell application "Terminal"
+            activate
+            do script "opencode"
+        end tell
+        '''
         subprocess.run(["osascript", "-e", script])
     else:
         open_app("VSCode", VSCODE_APPS)
