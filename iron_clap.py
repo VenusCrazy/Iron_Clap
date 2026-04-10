@@ -67,16 +67,24 @@ def action_worker():
 
 def trigger_action():
     os_name = get_os()
-    print(f"Detected OS: {os_name}")
     print("Opening VS Code and playing Back in Black...")
     
-    open_app("VSCode", VSCODE_APPS)
-    time.sleep(0.5)
-    open_url("https://www.youtube.com/watch?v=qRrElw4TSB4&autoplay=1")
-    
     if os_name == "Darwin":
+        try:
+            subprocess.run(["code"], stderr=subprocess.DEVNULL)
+        except FileNotFoundError:
+            subprocess.run(["open", "-a", "Visual Studio Code"])
+        
         time.sleep(0.5)
-        open_app("OpenCode", OPENCODE_APPS)
+        subprocess.run(["open", "https://www.youtube.com/watch?v=qRrElw4TSB4&autoplay=1"])
+        
+        time.sleep(0.5)
+        script = 'tell app "Terminal" to do script "opencode"'
+        subprocess.run(["osascript", "-e", script])
+    else:
+        open_app("VSCode", VSCODE_APPS)
+        time.sleep(0.5)
+        open_url("https://www.youtube.com/watch?v=qRrElw4TSB4&autoplay=1")
 
 def main():
     print("Listening for claps... (Press Ctrl+C to stop)")
